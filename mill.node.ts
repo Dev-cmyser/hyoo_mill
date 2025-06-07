@@ -3,7 +3,7 @@ namespace $ {
 
 	switch (mode) {
 		case 'table':
-			$hyoo_mill_table.process()
+			$hyoo_mill_table()
 			break
 
 		case 'quiet':

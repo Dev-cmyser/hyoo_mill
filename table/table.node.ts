@@ -1,8 +1,8 @@
 namespace $ {
-	export class $hyoo_mill_table {
-		lines = [] as string[]
+	export function $hyoo_mill_table() {
+		const lines = [] as string[]
 
-		colors = {
+		const colors = {
 			'': $mol_term_color.gray,
 			come: $mol_term_color.blue,
 			done: $mol_term_color.green,
@@ -12,13 +12,13 @@ namespace $ {
 			area: $mol_term_color.cyan,
 		}
 
-		stat = new Map<string, number>()
+		const stat = new Map<string, number>()
 
-		emit() {
-			if (this.lines.length === 0) return
+		function emit() {
+			if (lines.length === 0) return
 
-			const text = this.lines.join('')
-			this.lines.length = 0
+			const text = lines.join('')
+			lines.length = 0
 
 			try {
 				var input = $$.$mol_tree2_from_string(text, `stdin`)
@@ -36,9 +36,9 @@ namespace $ {
 
 				let str = typeof json === 'string' ? json : JSON.stringify(json)
 
-				let width = this.stat.get(field.type) ?? 0
+				let width = stat.get(field.type) ?? 0
 				if (str.length > width) {
-					this.stat.set(field.type, str.length)
+					stat.set(field.type, str.length)
 				}
 
 				if (!Number.isNaN(parseFloat(str))) {
@@ -50,26 +50,20 @@ namespace $ {
 				return str
 			})
 
-			const color = this.colors[input.kids[0].type as keyof typeof this.colors] || this.colors['']
+			const color = colors[input.kids[0].type as keyof typeof colors] || colors['']
 
 			console.log(color(values.join(' ')))
 		}
 
-		start() {
-			process.stdin
-				.pipe($node.split())
-				.on('data', (line: string) => {
-					if (line[0] !== '\t') this.emit()
-					if (line) this.lines.push(line + '\n')
-				})
-				.on('error', (line: string) => {
-					if (line[0] !== '\t') this.emit()
-					if (line) this.lines.push(line + '\n')
-				})
-		}
-
-		static process() {
-			new $hyoo_mill_table().start()
-		}
+		process.stdin
+			.pipe($node.split())
+			.on('data', (line: string) => {
+				if (line[0] !== '\t') emit()
+				if (line) lines.push(line + '\n')
+			})
+			.on('error', (line: string) => {
+				if (line[0] !== '\t') emit()
+				if (line) lines.push(line + '\n')
+			})
 	}
 }

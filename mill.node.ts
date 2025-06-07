@@ -7,8 +7,8 @@ namespace $ {
 			break
 
 		case 'quiet':
-			console.error('Mode `quiet` is not implemented yet')
-			process.exit(1)
+			$hyoo_mill_quiet()
+			break
 
 		default:
 			console.error('Supported modes: table, quiet')

@@ -15,8 +15,7 @@ namespace $ {
 			try {
 				var input = $$.$mol_tree2_from_string(text, `stdin`)
 			} catch (error) {
-				// В тихом режиме ошибки парсинга тоже показываем
-				console.error($mol_term_color.red(`Parse error: ${error}`))
+				// В тихом режиме ошибки парсинга не показываем
 				return
 			}
 
@@ -25,7 +24,7 @@ namespace $ {
 			if (firstField?.type !== 'fail') return
 
 			// Извлекаем только поле message - основную суть ошибки
-			const messageField = input.select('message', null).kids[0]
+			const messageField = input.kids.find(field => field.type === 'message')
 			let errorMessage = ''
 
 			if (messageField) {

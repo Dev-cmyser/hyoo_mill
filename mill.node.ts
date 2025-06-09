@@ -12,6 +12,5 @@ namespace $ {
 
 		default:
 			console.error('Supported modes: table, quiet')
-			process.exit(1)
 	}
 }

@@ -1,7 +1,7 @@
 namespace $ {
 	export function $hyoo_mill_quiet() {
 		const lines = [] as string[]
-		// Set для хранения ключей основных сообщений об ошибках
+		// Set для хранения уже выведенных сообщений
 		const printedErrors = new Set<string>()
 
 		const colors = {
@@ -49,15 +49,10 @@ namespace $ {
 				}
 
 				errorMessage = errorMessage.trim()
-
-				// Извлекаем основную часть сообщения об ошибке (до подсказки про stacktraces)
-				const errorKey = errorMessage.split('Set $mol_build_server.trace')[0].trim()
-				console.log('DEBUG: Error key:', errorKey)
-
-				// Выводим ошибку только если её основная часть ещё не была выведена
-				if (errorKey && !printedErrors.has(errorKey)) {
+				// Выводим ошибку только если она ещё не была выведена
+				if (errorMessage && !printedErrors.has(errorMessage)) {
 					console.error(colors.fail(errorMessage))
-					printedErrors.add(errorKey)
+					printedErrors.add(errorMessage)
 				}
 			}
 		}

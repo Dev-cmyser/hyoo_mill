@@ -6,11 +6,7 @@ namespace $ {
 			$hyoo_mill_table()
 			break
 
-		case 'quiet':
-			$hyoo_mill_quiet()
-			break
-
 		default:
-			console.error('Supported modes: table, quiet')
+			console.error('Supported modes: table')
 	}
 }

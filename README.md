@@ -6,13 +6,13 @@ CLI for Tree stream processing.
 
 ```sh
 npm install -g hyoo_mill
-some command 2>&1 | hyoo_mill table
+some command | hyoo_mill table
 ```
 
 or
 
 ```sh
-some comand 2>&1 | npm exec hyoo_mill table
+some comand | npm exec hyoo_mill table
 ```
 
 ## Examples
@@ -28,5 +28,6 @@ Example of output stream:
 ## testing
 
 ```sh
-npm start hyoo/mill &&  npm start 2>&1 | node hyoo/mill/-/node.js quiet
+npm start hyoo/mill &&  npm start | node hyoo/mill/-/node.js <command> <prop> 
+npm start hyoo/mill &&  npm start | node hyoo/mill/-/node.js table  message
 ```

@@ -8,6 +8,9 @@ namespace $ {
 			fail: $mol_term_color.red,
 		}
 
+		// Сообщения, которые нужно игнорировать
+		const ignoredMessages = new Set(['Run', 'Built', 'Connect'])
+
 		// Обертка для логирования
 		const logger = {
 			debug: (...args: any[]) => {
@@ -58,10 +61,20 @@ namespace $ {
 				}
 
 				errorMessage = errorMessage.trim()
-				// Выводим ошибку только если она ещё не была выведена
-				if (errorMessage && !printedErrors.has(errorMessage)) {
+
+				// Игнорируем определенные сообщения
+				if (ignoredMessages.has(errorMessage)) {
+					return
+				}
+
+				// Берем только первую часть сообщения об ошибке (до первого at)
+				const errorKey = errorMessage.split(' at ')[0]
+				logger.debug('DEBUG: Error key:', errorKey)
+
+				// Выводим ошибку только если её основная часть ещё не была выведена
+				if (errorKey && !printedErrors.has(errorKey)) {
 					logger.error(colors.fail(errorMessage))
-					printedErrors.add(errorMessage)
+					printedErrors.add(errorKey)
 				}
 			}
 		}

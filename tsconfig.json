@@ -1,0 +1,12 @@
+{
+	"extends": "../tsconfig.json",
+	"compilerOptions": {
+		"baseUrl": "../mill",
+		"moduleResolution": "node",
+		"paths": {
+			"*": ["../../node_modules/*"]
+		}
+	},
+	"types": ["node", "mol"],
+	"typeRoots": ["../../node_modules/@types", "../../node_modules"]
+}

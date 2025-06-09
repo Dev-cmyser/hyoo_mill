@@ -1,11 +1,20 @@
 namespace $ {
 	export function $hyoo_mill_quiet() {
+		const DEBUG = false // Флаг для отладки
 		const lines = [] as string[]
-		// Set для хранения уже выведенных сообщений
 		const printedErrors = new Set<string>()
 
 		const colors = {
 			fail: $mol_term_color.red,
+		}
+
+		// Обертка для логирования
+		const logger = {
+			debug: (...args: any[]) => {
+				if (DEBUG) console.log(...args)
+			},
+			log: (...args: any[]) => console.log(...args),
+			error: (...args: any[]) => console.error(...args),
 		}
 
 		function emit() {
@@ -21,23 +30,23 @@ namespace $ {
 				return
 			}
 
-			console.log('DEBUG: Processing input block')
+			logger.debug('DEBUG: Processing input block')
 			const firstBlock = input.kids[0]
-			console.log('DEBUG: First block type =', firstBlock?.type)
+			logger.debug('DEBUG: First block type =', firstBlock?.type)
 
 			// Проверяем блок done на наличие loopback
 			if (firstBlock?.type === 'done') {
 				const loopbackField = firstBlock.kids.find(field => field.type === 'loopback')
 				if (loopbackField) {
-					console.log('DEBUG: Found done block with loopback, full block:', firstBlock)
+					logger.debug('DEBUG: Found done block with loopback, full block:', firstBlock)
 					// Выводим весь блок done как есть
-					console.log(text)
+					logger.log(text)
 				}
 			}
 
 			// Обработка сообщения об ошибке
 			const messageField = firstBlock?.kids.find(field => field.type === 'message')
-			console.log('DEBUG: Message field =', messageField)
+			logger.debug('DEBUG: Message field =', messageField)
 
 			if (messageField) {
 				let errorMessage = ''
@@ -51,7 +60,7 @@ namespace $ {
 				errorMessage = errorMessage.trim()
 				// Выводим ошибку только если она ещё не была выведена
 				if (errorMessage && !printedErrors.has(errorMessage)) {
-					console.error(colors.fail(errorMessage))
+					logger.error(colors.fail(errorMessage))
 					printedErrors.add(errorMessage)
 				}
 			}

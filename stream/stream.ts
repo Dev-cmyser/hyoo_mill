@@ -46,7 +46,7 @@ namespace $ {
 	}
 
 	/** Convert tree node to JSON safely */
-	export function $hyoo_mill_stream_tree_to_json(field: $$.$mol_tree2) {
+	export function $hyoo_mill_stream_tree_to_json(field: $.$mol_tree2) {
 		try {
 			return $$.$mol_tree2_to_json(field.kids[0])
 		} catch (error) {

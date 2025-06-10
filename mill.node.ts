@@ -1,6 +1,6 @@
 namespace $ {
 	const modes: Record<string, () => void> = {
-		table: () => $hyoo_mill_table(),
+		table: () => $hyoo_mill_table.run(),
 	}
 
 	const mode = process.argv[2]

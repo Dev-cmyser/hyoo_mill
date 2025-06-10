@@ -7,12 +7,9 @@ CLI for Tree stream processing.
 ```sh
 npm install -g hyoo_mill
 some command | hyoo_mill table
-```
-
-or
-
-```sh
 some comand | npm exec hyoo_mill table
+npm start hyoo/mill &&  npm start | node hyoo/mill/-/node.js <command> <prop> 
+npm start hyoo/mill &&  npm start | node hyoo/mill/-/node.js table message
 ```
 
 ## Examples
@@ -24,10 +21,3 @@ Example of input stream:
 Example of output stream:
 
 ![](https://habrastorage.org/webt/eg/oy/bf/egoybfmkvntioztxvkuw3rsva8m.png)
-
-## testing
-
-```sh
-npm start hyoo/mill &&  npm start | node hyoo/mill/-/node.js <command> <prop> 
-npm start hyoo/mill &&  npm start | node hyoo/mill/-/node.js table  message
-```

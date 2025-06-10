@@ -1,6 +1,6 @@
 namespace $ {
 	/** Input data line processor type */
-	export type $hyoo_mill_line_processor = (lines: string[]) => void
+	type $hyoo_mill_line_processor = (lines: string[]) => void
 
 	/** Common colors for different log types */
 	export const $hyoo_mill_stream_colors = {
